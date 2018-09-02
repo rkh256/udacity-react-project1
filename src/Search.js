@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import * as BooksAPI from './BooksAPI';
 import { Link } from 'react-router-dom';
 import Book from './Book';
+import './Search.css';
+
 
 class Search extends Component {
   state = {
@@ -9,6 +11,10 @@ class Search extends Component {
     books: [],
   };
 
+  /**
+  * @description this method handles the search functionality
+  * @param {string} query
+  */
   updateQuery = (query) => {
     this.setState(() => ({
       searchTerm: query,
@@ -20,7 +26,7 @@ class Search extends Component {
       }));
       return;
     }
-
+    // TODO add debounce
     BooksAPI.search(query)
       .then(searchResults => {
         if (searchResults && searchResults.length > 0) {
@@ -66,6 +72,7 @@ class Search extends Component {
                       book={book}
                       booksOnShelf={this.props.booksOnShelf}
                       onSucessFullShelfChange={this.props.onSucessFullShelfChange}
+                      hideNoneOption={true}
                     />
                   </div>
                 ))
