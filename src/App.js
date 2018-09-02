@@ -24,9 +24,12 @@ class App extends Component {
     let books = [...this.state.books];
     let bookToUpdateIndex = books.findIndex(b => b.id === book.id);
     if (bookToUpdateIndex !== -1) {
-      books[bookToUpdateIndex].shelf = shelf;
+        books[bookToUpdateIndex].shelf = shelf;
+    } else {
+      book.shelf = shelf;
+      books.unshift(book);
     }
-    this.setState({books: books})
+    this.setState({books: books.filter(b => b.shelf !== 'none')});
   };
 
   render() {
