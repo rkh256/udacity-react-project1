@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import * as BooksAPI from './BooksAPI';
 import { Link } from 'react-router-dom';
-import BookShelf from './BookShelf';
-
+import Book from './Book';
 
 class Search extends Component {
   state = {
@@ -14,21 +13,21 @@ class Search extends Component {
     this.setState(() => ({
       searchTerm: query.trim(),
     }));
-
     BooksAPI.search(query.trim())
       .then(searchResults => {
-        console.log(searchResults)
         if (searchResults && searchResults.length > 0) {
           this.setState(() => ({
             books: searchResults,
           }));
         }
       })
+      .catch(error => {
+        console.error('error searching', error);
+      })
   };
 
   render() {
     const { searchTerm, books } = this.state;
-    console.log(books)
     return(
       <div>
         <div>
@@ -47,7 +46,19 @@ class Search extends Component {
           </form>
 
           <div>
-            <BookShelf books={this.state.books} />
+            <ul>
+              {
+                books.map(book => (
+                  <li key={book.id}>
+                    <Book
+                      book={book}
+                      booksOnShelf={this.props.booksOnShelf}
+                      onSucessFullShelfChange={this.props.onSucessFullShelfChange}
+                    />
+                  </li>
+                ))
+              }
+            </ul>
           </div>
 
         </div>

@@ -10,7 +10,10 @@ class BookShelf extends Component {
           {
             books.map(book => (
               <li key={book.id}>
-                <Book book={book} />
+                <Book
+                  book={book}
+                  onSucessFullShelfChange={this.props.onSucessFullShelfChange}
+                />
               </li>
             ))
           }
