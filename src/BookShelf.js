@@ -7,6 +7,9 @@ class BookShelf extends Component {
       const { books } = this.props;
       return(
         <div className='shelf-container'>
+          {books.length === 0 &&
+            <p>There currently no books on this shelf.</p>
+          }
           {
             books.map(book => (
               <div key={book.id}>

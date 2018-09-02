@@ -13,7 +13,6 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    console.log('mounted');
     BooksAPI.getAll()
       .then(BookData => {
         console.log(BookData);
@@ -31,6 +30,13 @@ class App extends Component {
   };
 
   render() {
+    const readBooks = this.state.books.filter(b => b.shelf === 'read');
+    const wantToReadBooks =
+      this.state.books.filter(b => b.shelf === 'wantToRead');
+    const currentlyReadingBooks =
+      this.state.books.filter(b => b.shelf === 'currentlyReading');
+
+
     return (
       <div className='bookshelf-app'>
           <Route exact path='/' render={() => (
@@ -39,8 +45,22 @@ class App extends Component {
                 <div className='container'>My Reads Project</div>
               </div>
               <div className='container'>
+                <h1>Currently Reading</h1>
+                <hr/>
                 <BookShelf
-                  books={this.state.books}
+                  books={currentlyReadingBooks}
+                  onSucessFullShelfChange={this.onSucessFullShelfChange}
+                />
+                <h1>Want To Read</h1>
+                <hr/>
+                <BookShelf
+                  books={wantToReadBooks}
+                  onSucessFullShelfChange={this.onSucessFullShelfChange}
+                />
+                <h1>Read</h1>
+                <hr/>
+                <BookShelf
+                  books={readBooks}
                   onSucessFullShelfChange={this.onSucessFullShelfChange}
                 />
                 <div className = 'search-button'>
