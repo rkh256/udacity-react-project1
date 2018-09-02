@@ -43,6 +43,23 @@ body {
   height: 200px;
 }
 
+.book .broken-image {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book .broken-image > .broken-image-icon {
+  background-image: url(/static/media/baseline-broken_image-24px.64ea7ade.svg);
+  height: 100px;
+  width: 100px;
+  background-size: cover;
+  opacity: .5;
+}
+
 .book p {
   text-align: center;
   margin: 0;

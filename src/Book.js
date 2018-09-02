@@ -3,7 +3,7 @@ import * as BooksAPI from './BooksAPI';
 
 class Book extends Component {
   state = {
-    shelfValue: ''
+    shelfValue: 'move'
   };
 
   componentDidMount = () => {
@@ -33,15 +33,23 @@ class Book extends Component {
   render() {
     const book = {...this.props.book};
     const authors = book.authors ? book.authors.join(', ') : '';
-    const thumbNail =
-      book.imageLinks && book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : '';
+    const hasThumbNail =
+      book.imageLinks && book.imageLinks.smallThumbnail ? true : false;
 
     return(
       <div className='book'>
-        <img
-          src={thumbNail}
-          alt={book.title}
-        />
+        {hasThumbNail &&
+          <img
+            src={book.imageLinks.smallThumbnail}
+            alt={book.title}
+          />
+        }
+        {!hasThumbNail &&
+          <div className='broken-image'>
+            <div className='broken-image-icon'></div>
+            <p>No Image</p>
+          </div>
+        }
         <div className='book-meta-text'>
           <p className='book-title'>{book.title}</p>
           <p className='book-authors'>{authors}</p>

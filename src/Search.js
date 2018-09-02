@@ -11,9 +11,17 @@ class Search extends Component {
 
   updateQuery = (query) => {
     this.setState(() => ({
-      searchTerm: query.trim(),
+      searchTerm: query,
     }));
-    BooksAPI.search(query.trim())
+
+    if (query.length === 0) {
+      this.setState(() => ({
+        books: [],
+      }));
+      return;
+    }
+
+    BooksAPI.search(query)
       .then(searchResults => {
         if (searchResults && searchResults.length > 0) {
           this.setState(() => ({
@@ -50,7 +58,6 @@ class Search extends Component {
                 />
               </form>
             </div>
-
             <div className='search-results-container'>
               {
                 books.map(book => (
