@@ -4,10 +4,11 @@ import Book from './Book';
 class BookShelf extends Component {
 
     render() {
+      const { books } = this.props;
       return(
         <ul>
           {
-            this.props.books.map(book => (
+            books.map(book => (
               <li key={book.id}>
                 <Book book={book} />
               </li>

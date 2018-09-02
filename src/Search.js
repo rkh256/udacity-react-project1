@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as BooksAPI from './BooksAPI';
 import { Link } from 'react-router-dom';
 import BookShelf from './BookShelf';
 
@@ -6,24 +7,28 @@ import BookShelf from './BookShelf';
 class Search extends Component {
   state = {
     searchTerm: '',
+    books: [],
   };
 
   updateQuery = (query) => {
     this.setState(() => ({
       searchTerm: query.trim(),
     }));
+
+    BooksAPI.search(query.trim())
+      .then(searchResults => {
+        console.log(searchResults)
+        if (searchResults && searchResults.length > 0) {
+          this.setState(() => ({
+            books: searchResults,
+          }));
+        }
+      })
   };
 
   render() {
-    const { searchTerm } = this.state;
-    const { books } = this.props;
-    let filteredBooks = [];
-    if (searchTerm.length > 0) {
-     filteredBooks = books.filter(b => b.title
-       .toLowerCase()
-       .includes(searchTerm.toLowerCase()));
-    }
-
+    const { searchTerm, books } = this.state;
+    console.log(books)
     return(
       <div>
         <div>
@@ -35,14 +40,14 @@ class Search extends Component {
             <input
               type='text'
               name='searchTerm'
-              placeHolder='Search For A Book'
+              placeholder='Search For A Book By Title Or Author'
               value={searchTerm}
               onChange={(event) => this.updateQuery(event.target.value)}
             />
           </form>
 
           <div>
-            <BookShelf books={filteredBooks} />
+            <BookShelf books={this.state.books} />
           </div>
 
         </div>
