@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Search from './Search';
 import BookShelf from './BookShelf';
+import RouteNotFound from './RouteNotFound';
 import './App.css';
 
 class App extends Component {
@@ -48,6 +48,7 @@ class App extends Component {
 
     return (
       <div className='bookshelf-app'>
+        <Switch>
           <Route exact path='/' render={() => (
             <div>
               <div className='header'>
@@ -88,7 +89,9 @@ class App extends Component {
                   />
               </div>
           )} />
-        </div>
+          <Route component={RouteNotFound} />
+        </Switch>
+      </div>
     );
   }
 }
