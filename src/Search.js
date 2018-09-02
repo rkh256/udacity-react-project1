@@ -27,7 +27,7 @@ class Search extends Component {
       }));
       return;
     }
-    // TODO add debounce
+
     BooksAPI.search(query)
       .then(searchResults => {
         if (searchResults && searchResults.length > 0) {
