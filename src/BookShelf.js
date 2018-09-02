@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Book from './Book';
 
 class BookShelf extends Component {
-
     render() {
       const { books } = this.props;
       return(

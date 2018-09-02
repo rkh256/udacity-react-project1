@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import * as BooksAPI from './BooksAPI';
+import './Book.css';
 
 class Book extends Component {
   state = {
     shelfValue: 'move'
   };
 
+  /**
+  * @description This method gets passed down to the Book Component
+  * @param {event} event
+  */
   componentDidMount = () => {
     if (!this.props.book.shelf) {
       let bookOnShelf = this.props.booksOnShelf
@@ -18,6 +23,11 @@ class Book extends Component {
     }
   };
 
+  /**
+  * @description Updates the book and calls onSucessFullShelfChange which
+  * is passed in from the App component
+  * @param {event} event
+  */
   handleChange = event => {
     this.setState({shelfValue: event.target.value});
     BooksAPI.update(this.props.book, event.target.value)

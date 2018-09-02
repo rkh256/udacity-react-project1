@@ -20,6 +20,13 @@ class App extends Component {
       });
   }
 
+  /**
+  * @description Gets passed down to the Book Componenet. Looks for
+  * the modified book in shelves. If its found its shelf property
+  * gets updated. If not found the book is added to the shelves with
+  * the correct shelf property.
+  * @param {event} event
+  */
   onSucessFullShelfChange = (book, shelf) => {
     let books = [...this.state.books];
     let bookToUpdateIndex = books.findIndex(b => b.id === book.id);
@@ -38,7 +45,6 @@ class App extends Component {
       this.state.books.filter(b => b.shelf === 'wantToRead');
     const currentlyReadingBooks =
       this.state.books.filter(b => b.shelf === 'currentlyReading');
-
 
     return (
       <div className='bookshelf-app'>
