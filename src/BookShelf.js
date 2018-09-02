@@ -6,18 +6,18 @@ class BookShelf extends Component {
     render() {
       const { books } = this.props;
       return(
-        <ul>
+        <div className='shelf-container'>
           {
             books.map(book => (
-              <li key={book.id}>
+              <div key={book.id}>
                 <Book
                   book={book}
                   onSucessFullShelfChange={this.props.onSucessFullShelfChange}
                 />
-              </li>
+              </div>
             ))
           }
-        </ul>
+        </div>
       );
     }
 };

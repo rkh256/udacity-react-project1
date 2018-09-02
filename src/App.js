@@ -22,7 +22,6 @@ class App extends Component {
   }
 
   onSucessFullShelfChange = (book, shelf) => {
-    console.log(book);
     let books = [...this.state.books];
     let bookToUpdateIndex = books.findIndex(b => b.id === book.id);
     if (bookToUpdateIndex !== -1) {
@@ -33,32 +32,34 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Route exact path='/' render={() => (
-          <div>
-            main
-            <BookShelf
-              books={this.state.books}
-              onSucessFullShelfChange={this.onSucessFullShelfChange}
-            />
-            <div className = 'search-button'>
-              <Link to='/search'>
-                +
-              </Link>
-            </div>
-          </div>
-        )} />
-        <Route path='/search' render={() => (
+      <div className='bookshelf-app'>
+          <Route exact path='/' render={() => (
             <div>
-              <Search
-                booksOnShelf={this.state.books}
-                onSucessFullShelfChange={this.onSucessFullShelfChange}
-              />
+              <div className='header'>
+                <div className='container'>My Reads Project</div>
+              </div>
+              <div className='container'>
+                <BookShelf
+                  books={this.state.books}
+                  onSucessFullShelfChange={this.onSucessFullShelfChange}
+                />
+                <div className = 'search-button'>
+                  <Link to='/search'>
+                    +
+                  </Link>
+                </div>
+              </div>
             </div>
-        )} />
-
-
-      </div>
+          )} />
+          <Route path='/search' render={() => (
+              <div>
+                  <Search
+                    booksOnShelf={this.state.books}
+                    onSucessFullShelfChange={this.onSucessFullShelfChange}
+                  />
+              </div>
+          )} />
+        </div>
     );
   }
 }

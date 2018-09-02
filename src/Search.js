@@ -30,37 +30,40 @@ class Search extends Component {
     const { searchTerm, books } = this.state;
     return(
       <div>
-        <div>
-          <Link to='/'>
-            Back
-          </Link>
+        <div className='header'>
+          <div className='backButton'>
+            <Link to='/'>
+              <button>Back</button>
+            </Link>
+          </div>
+          <div className='container'>My Reads Project - Search</div>
+        </div>
+        <div className='container container--search'>
+            <div className='search-field-container'>
+              <form>
+                <input
+                  type='text'
+                  name='searchTerm'
+                  placeholder='Search For A Book By Title Or Author'
+                  value={searchTerm}
+                  onChange={(event) => this.updateQuery(event.target.value)}
+                />
+              </form>
+            </div>
 
-          <form>
-            <input
-              type='text'
-              name='searchTerm'
-              placeholder='Search For A Book By Title Or Author'
-              value={searchTerm}
-              onChange={(event) => this.updateQuery(event.target.value)}
-            />
-          </form>
-
-          <div>
-            <ul>
+            <div className='search-results-container'>
               {
                 books.map(book => (
-                  <li key={book.id}>
+                  <div key={book.id}>
                     <Book
                       book={book}
                       booksOnShelf={this.props.booksOnShelf}
                       onSucessFullShelfChange={this.props.onSucessFullShelfChange}
                     />
-                  </li>
+                  </div>
                 ))
               }
-            </ul>
-          </div>
-
+            </div>
         </div>
       </div>
     )

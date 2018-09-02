@@ -37,13 +37,15 @@ class Book extends Component {
       book.imageLinks && book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : '';
 
     return(
-      <div>
+      <div className='book'>
         <img
           src={thumbNail}
           alt={book.title}
         />
-        <p>{book.title}</p>
-        <p>{authors}</p>
+        <div className='book-meta-text'>
+          <p className='book-title'>{book.title}</p>
+          <p className='book-authors'>{authors}</p>
+        </div>
         <div className="book-shelf-changer">
             <select value={this.state.shelfValue} onChange={this.handleChange}>
               <option value="move" disabled>Move to...</option>
