@@ -72,7 +72,6 @@ class Search extends Component {
                       book={book}
                       booksOnShelf={this.props.booksOnShelf}
                       onSucessFullShelfChange={this.props.onSucessFullShelfChange}
-                      hideNoneOption={true}
                     />
                   </div>
                 ))

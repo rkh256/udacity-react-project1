@@ -4,7 +4,7 @@ import './Book.css';
 
 class Book extends Component {
   state = {
-    shelfValue: 'move'
+    shelfValue: 'none'
   };
 
   /**
@@ -70,9 +70,7 @@ class Book extends Component {
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
-              {!this.props.hideNoneOption &&
-                <option value="none">None</option>
-              }
+              <option value="none">None</option>
             </select>
           </div>
       </div>
